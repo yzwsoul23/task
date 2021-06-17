@@ -1,3 +1,4 @@
+# Unit PYG02: Pygame Wall Ball Game version 2  节奏型
 #引入pygame,sys
 import pygame,sys
 #初始化init及设置
