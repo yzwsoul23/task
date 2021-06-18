@@ -1,4 +1,4 @@
-# Unit PYG03: Pygame Wall Ball Game version 7  感知型
+# Unit PYG03: Pygame Wall Ball Game version 8 鼠标
 #引入pygame,sys
 import pygame,sys
 #初始化init及设置
@@ -20,6 +20,7 @@ ballrect=ball.get_rect() #pygame使用内部定义surface对象表示载入图�
 #width, height表示宽度、高度
 fps=120
 fclock=pygame.time.Clock() #每秒刷新频率
+still = False
 while True:
     #获取事件并逐类相应
     for event in pygame.event.get():
@@ -39,15 +40,27 @@ while True:
         elif event.type == pygame.VIDEORESIZE: #新窗口大小
             size = width,height = event.size[0],event.size[1] #重新赋值size为新窗口大小
             screen=pygame.display.set_mode(size,pygame.RESIZABLE) #将屏幕大小重新设置
-    if pygame.display.get_active():
+        elif event.type == pygame.MOUSEBUTTONDOWN:#鼠标键按下
+            if event.button == 1:
+                still = True
+        elif event.type == pygame.MOUSEBUTTONUP: #鼠标键释放
+            still = False
+            if event.button == 1:
+                ballrect = ballrect.move(event.pos[0] - ballrect.left,event.pos[1] - ballrect.top)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.buttons[0] == 1:
+                ballrect = ballrect.move(event.pos[0] - ballrect.left,event.pos[1] - ballrect.top)
+    if pygame.display.get_active() and not still:
         ballrect = ballrect.move(speed)#图像的移动
     #壁球的反弹运动
-    #遇到左右两侧,横向速度取反
-    if ballrect.left<0 or ballrect.right>width:
+    if ballrect.left<0 or ballrect.right>width: #遇到左右两侧,横向速度取反
         speed[0]= -speed[0]
-    #遇到上下两侧,纵向速度取反
-    if ballrect.top<0 or ballrect.bottom>height:
+        if ballrect.right > width and ballrect.right + speed[0] > ballrect.right: #防止卡边框
+            speed[0]= -speed[0]
+    if ballrect.top<0 or ballrect.bottom>height: #遇到上下两侧,纵向速度取反
         speed[1]= -speed[1]
+        if ballrect.bottom > height and ballrect.bottom + speed[1] > ballrect.bottom: #防止卡边框
+            speed[1]= -speed[1]
     #填充颜色
     screen.fill(BLACK)
     #将图像绘制在另一个图像上面
