@@ -12,9 +12,14 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pygame文字绘制")
 f1 = pygame.freetype.Font("C://Windows//Fonts//msyh.ttc", 36)
 f1surf, f1rect = f1.render("世界和平", fgcolor=GOLD, size=50)
-fps = 300
+fps = 60
 fclock = pygame.time.Clock()
-
+bgcolor = pygame.Color("black")
+def RGBChannel(a):
+    return 0 if a<0 else (255 if a>255 else int(a))
+bgcolor.r = RGBChannel(f1rect.width*255/width)
+bgcolor.g = RGBChannel(f1rect.height*255/height)
+bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -25,9 +30,11 @@ while True:
         speed[1] = - speed[1]
     pos[0] = pos[0] + speed[0]
     pos[1] = pos[1] + speed[1]
-
-    screen.fill(BLACK)
-    f1surf, f1rect = f1.render("世界核平", fgcolor=GOLD, size=50)
+    bgcolor.r = RGBChannel(f1rect.width*255/width)
+    bgcolor.g = RGBChannel(f1rect.height*255/height)
+    bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
+    screen.fill(bgcolor)
     screen.blit(f1surf, (pos[0], pos[1]))
     pygame.display.update()
     fclock.tick(fps)
+    print(bgcolor)

@@ -24,6 +24,9 @@ still = False
 bgcolor = pygame.Color("black")
 def RGBChannel(a):
     return 0 if a<0 else (255 if a>255 else int(a))
+bgcolor.r = RGBChannel(ballrect.left*255/width)
+bgcolor.g = RGBChannel(ballrect.top*255/height)
+bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
 while True:
     #获取事件并逐类相应
     for event in pygame.event.get():
@@ -58,15 +61,21 @@ while True:
     #壁球的反弹运动
     if ballrect.left<0 or ballrect.right>width: #遇到左右两侧,横向速度取反
         speed[0]= -speed[0]
+        bgcolor.r = RGBChannel(ballrect.left*255/width)
+        bgcolor.g = RGBChannel(ballrect.top*255/height)
+        bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
         if ballrect.right > width and ballrect.right + speed[0] > ballrect.right: #防止卡边框
             speed[0]= -speed[0]
     if ballrect.top<0 or ballrect.bottom>height: #遇到上下两侧,纵向速度取反
         speed[1]= -speed[1]
+        bgcolor.r = RGBChannel(ballrect.left*255/width)
+        bgcolor.g = RGBChannel(ballrect.top*255/height)
+        bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
         if ballrect.bottom > height and ballrect.bottom + speed[1] > ballrect.bottom: #防止卡边框
             speed[1]= -speed[1]
-    bgcolor.r = RGBChannel(ballrect.left*255/width)
-    bgcolor.g = RGBChannel(ballrect.top*255/height)
-    bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
+    #bgcolor.r = RGBChannel(ballrect.left*255/width)
+    #bgcolor.g = RGBChannel(ballrect.top*255/height)
+    #bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
     #填充颜色
     screen.fill(bgcolor)
     #将图像绘制在另一个图像上面
