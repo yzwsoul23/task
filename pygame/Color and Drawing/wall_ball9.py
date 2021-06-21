@@ -73,9 +73,9 @@ while True:
         bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
         if ballrect.bottom > height and ballrect.bottom + speed[1] > ballrect.bottom: #防止卡边框
             speed[1]= -speed[1]
-    #bgcolor.r = RGBChannel(ballrect.left*255/width)
-    #bgcolor.g = RGBChannel(ballrect.top*255/height)
-    #bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
+    bgcolor.r = RGBChannel(ballrect.left*255/width)
+    bgcolor.g = RGBChannel(ballrect.top*255/height)
+    bgcolor.b = RGBChannel(min(speed[0],speed[1])*255/max(speed[0],speed[1],1))
     #填充颜色
     screen.fill(bgcolor)
     #将图像绘制在另一个图像上面
