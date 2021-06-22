@@ -29,13 +29,17 @@ while True:
             sys.exit()
         elif event.type==pygame.KEYDOWN: #判断是否按下键盘
             if event.key==pygame.K_LEFT: #判断是否按下左键
-                speed[0]=speed[0] if speed[0] ==width+1 else speed[0]-1# 向左移动1
+                speed1[0]=speed1[0] if speed1[0] ==width+1 else speed1[0]-1# 向左移动1
+                speed2[0] = speed2[0] if speed2[0] == width + 1 else speed2[0] - 1  # 向左移动1
             elif event.key==pygame.K_RIGHT: #判断是否按下右键
-                speed[0]=speed[0] if speed[0] ==width+1 else speed[0]+1# 向右移动1
+                speed1[0]=speed1[0] if speed1[0] ==width+1 else speed1[0]+1# 向右移动1
+                speed2[0]=speed2[0] if speed2[0] ==width+1 else speed2[0]+1# 向右移动1
             elif event.key==pygame.K_UP: #判断是否按下上键
-                speed[1]=speed[1] if speed[1] ==height+1 else speed[1]-1# 向上移动1
+                speed1[1]=speed1[1] if speed1[1] ==height+1 else speed1[1]-1# 向上移动1
+                speed2[1]=speed2[1] if speed2[1] == height + 1 else speed2[1] - 1  # 向上移动1
             elif event.key==pygame.K_DOWN: #判断是否按下下键
-                speed[1]=speed[1] if speed[1] ==height+1 else speed[1]+1# 向下移动1
+                speed1[1]=speed1[1] if speed1[1]==height+1 else speed1[1]+1# 向下移动1
+                speed2[1]=speed2[1] if speed2[1] == height + 1 else speed2[1] + 1  # 向下移动1
             elif event.key==pygame.K_ESCAPE:
                 sys.exit()
     if pos1[0] < 0 or pos1[0] + f1rect.width > width:
