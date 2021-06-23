@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16a761df-c1cb-4a5e-9333-e9da5ccc0676" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MainWinBuddy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MainWinBuddy.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RunMainWinBuddy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RunMainWinSignalSlot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RunMainWinTabOrder.py" afterDir="false" />
+    <list default="true" id="16a761df-c1cb-4a5e-9333-e9da5ccc0676" name="Default Changelist" comment="6.23">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWinSignalSlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWinSignalSlot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWinSignalSlot.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MainWinSignalSlot.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,6 +135,14 @@
       <option name="presentableId" value="Default" />
       <updated>1624349057817</updated>
     </task>
+    <task id="LOCAL-00001" summary="6.23">
+      <created>1624442403207</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1624442403207</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,5 +155,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="6.23" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.23" />
   </component>
 </project>

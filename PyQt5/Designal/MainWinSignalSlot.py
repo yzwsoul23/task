@@ -14,12 +14,33 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(800, 598)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(710, 10, 75, 23))
         self.pushButton.setObjectName("pushButton")
+        self.widget = QtWidgets.QWidget(self.centralwidget)
+        self.widget.setGeometry(QtCore.QRect(190, 160, 258, 264))
+        self.widget.setObjectName("widget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.radioButton = QtWidgets.QRadioButton(self.widget)
+        self.radioButton.setChecked(True)
+        self.radioButton.setObjectName("radioButton")
+        self.verticalLayout.addWidget(self.radioButton)
+        self.lineEdit = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit.setObjectName("lineEdit")
+        self.verticalLayout.addWidget(self.lineEdit)
+        self.checkBox = QtWidgets.QCheckBox(self.widget)
+        self.checkBox.setChecked(False)
+        self.checkBox.setObjectName("checkBox")
+        self.verticalLayout.addWidget(self.checkBox)
+        self.textEdit = QtWidgets.QTextEdit(self.widget)
+        self.textEdit.setEnabled(False)
+        self.textEdit.setObjectName("textEdit")
+        self.verticalLayout.addWidget(self.textEdit)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 23))
@@ -30,10 +51,17 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
+        #单击按钮发出信号连接方法关闭窗口
         self.pushButton.clicked.connect(MainWindow.close)
+        # 切换单选框的布尔值发出信号连接方法行输入可见
+        self.radioButton.toggled['bool'].connect(self.lineEdit.setVisible)
+        # 切换多选框的布尔值发出信号连接方法文本输入可用
+        self.checkBox.toggled['bool'].connect(self.textEdit.setEnabled)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "关闭窗口"))
+        self.pushButton.setText(_translate("MainWindow", "关闭窗口(&C)"))
+        self.radioButton.setText(_translate("MainWindow", "显示/隐藏(&V)"))
+        self.checkBox.setText(_translate("MainWindow", "可用/不可用(&E)"))
