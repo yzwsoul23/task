@@ -1,7 +1,6 @@
 # QDesktopWidget
 import sys
 from PyQt5.QtWidgets import QMainWindow,QApplication,QDesktopWidget
-from PyQt5.QtGui import QIcon
 
 class CenterForm(QMainWindow):
     def __init__(self,parent=None):
