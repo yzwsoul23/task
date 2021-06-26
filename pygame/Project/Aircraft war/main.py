@@ -4,6 +4,8 @@ import pygame
 
 # 初始化界面
 pygame.init()
+# 判定游戏结束
+rungame = True
 # 设置窗口大小
 screen = pygame.display.set_mode((800,600))
 # 设置窗口名称
@@ -29,11 +31,20 @@ playerY = 500
 player_step = 0
 # 定义分数
 score = 0
-font = pygame.font.SysFont('simsunnsimsun',32)
+font1 = pygame.font.SysFont('simsunnsimsun',32)
+font2 = pygame.font.SysFont('simsunnsimsun',128)
+# 显示分数
 def show_score():
     text = f'分数: {score}'
-    score_render = font.render(text,True,(0,255,255))
+    score_render = font1.render(text,True,(0,255,255))
     screen.blit(score_render,(10,10))
+
+# 显示游戏结束
+def show_gameover():
+    if not rungame:
+        text = '游戏结束'
+        render = font2.render(text,True,(255,0,0))
+        screen.blit(render,(150,150))
 
 # 添加敌人
 num_of_enemy = 6 # 敌人数量
@@ -48,7 +59,7 @@ class Enemy():
         self.step = random.randint(2,4)
     def reset(self): # 当被射中时,恢复位置
         self.x = random.randint(0, 720)
-        self.y = random.randint(0, 150)
+        self.y = random.randint(0, 100)
         self.step = random.randint(2, 4)
 enemies = [] # 保存的列表
 for i in range(num_of_enemy):
@@ -82,13 +93,18 @@ class Bullet():
 bullets = [] # 保存现有子弹
 # 定义显示敌人角色及位置移动函数
 def show_enemy():
+    global rungame
     for e in enemies:
         screen.blit(e.Img,(e.x,e.y))
         e.x += e.step
         e.y += abs(e.step/6)
         if e.x > 736 or e.x < 0:
             e.step *= -1
-            e.y += 30
+            e.y += 5
+        elif e.y > 550:
+            rungame = False
+            print('游戏结束')
+            enemies.clear()
 
 # 定义显示子弹角色及位置移动函数
 def show_bullet():
@@ -144,6 +160,7 @@ while True:
     Prevent_out()
     show_enemy()# 设置敌人
     show_bullet()#设置子弹
+    show_gameover()# 检查显示游戏结束
 
     # 刷新游戏界面
     pygame.display.update()
