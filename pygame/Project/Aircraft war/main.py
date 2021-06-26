@@ -1,3 +1,5 @@
+import random
+
 import pygame
 
 # 初始化界面
@@ -18,21 +20,37 @@ playerImg = pygame.image.load('./resource/player.png')
 playerX = 368
 playerY = 500
 player_step = 0
-# 导入敌人角色文件
-enemyImg = pygame.image.load('./resource/enemy.png')
-# 初始化敌人角色位置及速度
-enemyX = 0
-enemyY = 0
-enemyStep = 4
-# 定义敌人角色及位置函数
+
+# 添加敌人
+num_of_enemy = 6 # 敌人数量
+# 敌人的类
+class Enemy():
+    def __init__(self):
+        # 导入敌人角色文件
+        self.Img = pygame.image.load('./resource/enemy.png')
+        # 初始化敌人角色位置及速度
+        self.x = random.randint(0,720)
+        self.y = random.randint(0,150)
+        self.step = random.randint(2,5)
+enemies = [] # 保存的列表
+for i in range(num_of_enemy):
+    enemies.append(Enemy())
+
+# 定义显示敌人角色及位置移动函数
 def show_enemy():
-    global enemyX,enemyY
-    screen.blit(enemyImg,(enemyX,enemyY))
-    enemyX += enemyStep
-    enemyY += abs(enemyStep/6)
+    for e in enemies:
+        screen.blit(e.Img,(e.x,e.y))
+        e.x += e.step
+        e.y += abs(e.step/6)
+        if e.x > 736 or e.x < 0:
+            e.step *= -1
+            e.y += 30
+
+
+
 # 定义事件响应函数
 def process_event():
-    global player_step
+    global player_step # global将局部变量变为全局变量
     for event in pygame.event.get():
         # 游戏推出
         if event.type == pygame.QUIT:
@@ -43,17 +61,15 @@ def process_event():
                 player_step = -5
             elif event.key == pygame.K_RIGHT:
                 player_step = 5
-        elif event.type == pygame.KEYUP: # 当按键抬起玩家角色不动
-            player_step = 0
+            elif event.type == pygame.KEYUP:  # 当按键抬起玩家角色不动
+                player_step = 0
 # 定义防止玩家角色出界函数
 def Prevent_out():
-    global playerX,enemyX,enemyStep
+    global playerX,enemyX,enemyY,enemyStep
     if playerX > 736:
         playerX = 736
     elif playerX < 0:
         playerX = 0
-    elif enemyX > 736 or enemyX < 0:
-        enemyStep = -enemyStep
 
 # 游戏主循环
 while True:
