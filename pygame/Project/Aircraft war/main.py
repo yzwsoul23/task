@@ -29,10 +29,11 @@ playerY = 500
 player_step = 0
 # 定义分数
 score = 0
-font = pygame.font.Font('freesansbold.ttf',32)
+font = pygame.font.SysFont('simsunnsimsun',32)
 def show_score():
-    text = f'分数:{score}'
-    score_render = font.render(text,True,(255,255,255))
+    text = f'分数: {score}'
+    score_render = font.render(text,True,(0,255,255))
+    screen.blit(score_render,(10,10))
 
 # 添加敌人
 num_of_enemy = 6 # 敌人数量
@@ -131,6 +132,8 @@ def Prevent_out():
 while True:
     # 设置背景及位置
     screen.blit(bgimg, (0, 0))
+    # 显示分数
+    show_score()
     # 设置玩家角色及位置
     screen.blit(playerImg,(playerX,playerY))
     # 使角色持续移动
