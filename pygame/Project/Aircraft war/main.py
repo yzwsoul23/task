@@ -17,14 +17,22 @@ bgimg = pygame.image.load('./resource/bg.png')
 # 导入玩家角色文件
 playerImg = pygame.image.load('./resource/player.png')
 # 添加背景音
-pygame.mixer.music.load('./resource/bg.wav')
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.1)
+bgm = pygame.mixer.Sound('./resource/bg.wav')
+bgm.play(-1)
+bgm.set_volume(0.5)
+# 添加击中音效
+baosuond = pygame.mixer.Sound('./resource/exp.wav')
+baosuond.set_volume(0.5)
 # 初始化玩家角色位置及速度
 playerX = 368
 playerY = 500
 player_step = 0
-builtinboor = False
+# 定义分数
+score = 0
+font = pygame.font.Font('freesansbold.ttf',32)
+def show_score():
+    text = f'分数:{score}'
+    score_render = font.render(text,True,(255,255,255))
 
 # 添加敌人
 num_of_enemy = 6 # 敌人数量
@@ -61,10 +69,14 @@ class Bullet():
         self.y = playerY -10
         self.step = 10
     def hit(self): # 击中敌人
+        global score
         for e in enemies:
             if(distance(self.x,self.y,e.x,e.y)<40): # 射中了
-                bullets.remove(self)
+                baosuond.play() # 播放音效
+                bullets.remove(self) # 移除子弹组
                 e.reset()
+                score += 1
+                print('分数: ',score)
 
 bullets = [] # 保存现有子弹
 # 定义显示敌人角色及位置移动函数
