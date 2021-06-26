@@ -1,5 +1,5 @@
 import random
-
+import math
 import pygame
 
 # 初始化界面
@@ -20,10 +20,11 @@ playerImg = pygame.image.load('./resource/player.png')
 playerX = 368
 playerY = 500
 player_step = 0
+builtinboor = False
 
 # 添加敌人
 num_of_enemy = 6 # 敌人数量
-# 敌人的类
+# 创建敌人的类
 class Enemy():
     def __init__(self):
         # 导入敌人角色文件
@@ -31,11 +32,37 @@ class Enemy():
         # 初始化敌人角色位置及速度
         self.x = random.randint(0,720)
         self.y = random.randint(0,150)
-        self.step = random.randint(2,5)
+        self.step = random.randint(2,4)
+    def reset(self): # 当被射中时,恢复位置
+        self.x = random.randint(0, 720)
+        self.y = random.randint(0, 150)
+        self.step = random.randint(2, 4)
 enemies = [] # 保存的列表
 for i in range(num_of_enemy):
     enemies.append(Enemy())
 
+# 两个点之间的距离
+def distance (bx,by,ex,ey):
+    a = bx - ex
+    b = by - ey
+    return math.sqrt(a*a+b*b) #勾股定理
+
+# 创建子弹类
+class Bullet():
+    def __init__(self):
+        # 导入子弹角色文件
+        self.Img = pygame.image.load('./resource/bullet.png')
+        # 子弹角色位置及速度
+        self.x = playerX +16
+        self.y = playerY -10
+        self.step = 10
+    def hit(self): # 击中敌人
+        for e in enemies:
+            if(distance(self.x,self.y,e.x,e.y)<30): # 射中了
+                bullets.remove(self)
+                e.reset()
+
+bullets = [] # 保存现有子弹
 # 定义显示敌人角色及位置移动函数
 def show_enemy():
     for e in enemies:
@@ -46,11 +73,19 @@ def show_enemy():
             e.step *= -1
             e.y += 30
 
+# 定义显示子弹角色及位置移动函数
+def show_bullet():
+    for b in bullets:
+        screen.blit(b.Img,(b.x,b.y))
+        b.hit() # 检查是否击中敌人
+        b.y -= b.step
+        if b.y < 0:
+            bullets.remove(b)
 
 
 # 定义事件响应函数
 def process_event():
-    global player_step # global将局部变量变为全局变量
+    global player_step,builtinboor # global将局部变量变为全局变量
     for event in pygame.event.get():
         # 游戏推出
         if event.type == pygame.QUIT:
@@ -61,7 +96,12 @@ def process_event():
                 player_step = -5
             elif event.key == pygame.K_RIGHT:
                 player_step = 5
-            elif event.type == pygame.KEYUP:  # 当按键抬起玩家角色不动
+            elif event.key == pygame.K_SPACE:
+                print('发射子弹-.-.-')
+                # 创建一颗子弹
+                bullets.append(Bullet())
+        elif event.type == pygame.KEYUP:  # 当按键抬起玩家角色不动
+            if event.key == pygame.K_LEFT or pygame.K_RIGHT:
                 player_step = 0
 # 定义防止玩家角色出界函数
 def Prevent_out():
@@ -83,7 +123,9 @@ while True:
     process_event()
     # 防止玩家角色出界
     Prevent_out()
-    show_enemy()
+    show_enemy()# 设置敌人
+    show_bullet()#设置子弹
+
     # 刷新游戏界面
     pygame.display.update()
 
