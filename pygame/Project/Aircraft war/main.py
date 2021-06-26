@@ -16,6 +16,10 @@ pygame.display.set_icon(icon)
 bgimg = pygame.image.load('./resource/bg.png')
 # 导入玩家角色文件
 playerImg = pygame.image.load('./resource/player.png')
+# 添加背景音
+pygame.mixer.music.load('./resource/bg.wav')
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.1)
 # 初始化玩家角色位置及速度
 playerX = 368
 playerY = 500
@@ -58,7 +62,7 @@ class Bullet():
         self.step = 10
     def hit(self): # 击中敌人
         for e in enemies:
-            if(distance(self.x,self.y,e.x,e.y)<30): # 射中了
+            if(distance(self.x,self.y,e.x,e.y)<40): # 射中了
                 bullets.remove(self)
                 e.reset()
 
