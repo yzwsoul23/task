@@ -24,7 +24,7 @@ QLabel常用的信号（事件）：
 import sys
 from PyQt5.QtWidgets import QVBoxLayout,QMainWindow,QApplication,QLabel,QWidget
 from PyQt5.QtGui import QPixmap, QPalette # QPixmap用来显示图片,QPalette用来绘制颜色
-from PyQt5.QtCore import Qt # 用来调用整个Qt库中使用的其他标识符
+from PyQt5.QtCore import Qt # x
 
 class QLabelDemo(QWidget) :
     def __init__(self):
