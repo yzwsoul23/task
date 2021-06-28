@@ -37,8 +37,8 @@ class QLabelDemo(QWidget) :
         label3 = QLabel(self)
         label4 = QLabel(self)
 
-        #
-        label1.setText("<font col8or=yellow>这是一个文本标签.</font>")
+
+        label1.setText("<font color=yellow>这是一个文本标签.</font>")
         label1.setAutoFillBackground(True) # 自动填充背景
         palette = QPalette()
         palette.setColor(QPalette.Window,Qt.blue)  # 设置背景色
@@ -66,9 +66,9 @@ class QLabelDemo(QWidget) :
         vbox.addWidget(label3)
         vbox.addWidget(label4)
 
-        # 绑定
+        # 当链接悬停时连接linkHovered方法
         label2.linkHovered.connect(self.linkHovered)
-
+        # 当链接激活时连接linkClicked方法
         label4.linkActivated.connect(self.linkClicked)
 
         self.setLayout(vbox)
