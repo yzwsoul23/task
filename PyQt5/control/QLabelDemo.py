@@ -1,19 +1,19 @@
 '''
 QLabel控件
 
-setText()：设置文本内容
+setAlignment()：设置文本的对齐方式
 
 setIndent()：设置文本缩进
-
-setWordWrap()：设置是否允许换行
-
-setAlignment()：设置文本的对齐方式
 
 text()：获取文本内容
 
 setBuddy()：设置伙伴关系
 
+setText()：设置文本内容
+
 selectedText()：返回所选择的字符
+
+setWordWrap()：设置是否允许换行
 
 QLabel常用的信号（事件）：
 1.  当鼠标滑过QLabel控件时触发：linkHovered
@@ -23,8 +23,8 @@ QLabel常用的信号（事件）：
 
 import sys
 from PyQt5.QtWidgets import QVBoxLayout,QMainWindow,QApplication,QLabel,QWidget
-from PyQt5.QtGui import QPixmap, QPalette # QPixmap用来显示图片,QPalette用来绘制颜色
-from PyQt5.QtCore import Qt # x
+from PyQt5.QtGui import QPixmap, QPalette
+from PyQt5.QtCore import Qt
 
 class QLabelDemo(QWidget) :
     def __init__(self):
@@ -37,38 +37,39 @@ class QLabelDemo(QWidget) :
         label3 = QLabel(self)
         label4 = QLabel(self)
 
-
         label1.setText("<font color=yellow>这是一个文本标签.</font>")
-        label1.setAutoFillBackground(True) # 自动填充背景
+        label1.setAutoFillBackground(True)
         palette = QPalette()
         palette.setColor(QPalette.Window,Qt.blue)  # 设置背景色
         label1.setPalette(palette)
-        label1.setAlignment(Qt.AlignCenter) # 使文本居中对齐
+        label1.setAlignment(Qt.AlignCenter)
 
-        label2.setText("<a href='#'>欢迎使用Python  GUI程序</a>") #
+        label2.setText("<a href='#'>欢迎使用Python  GUI程序</a>")
 
         label3.setAlignment(Qt.AlignCenter)
-        label3.setToolTip('这是一个图片标签')
-        label3.setPixmap(QPixmap("./images/python.jpg"))
 
+        label3.setToolTip('这是一个图片标签')
+
+        label3.setPixmap(QPixmap("./images/python.jpg"))
         # 如果设为True，用浏览器打开网页，如果设为False，调用槽函数
         label4.setOpenExternalLinks(True)
-        label4.setText("<a href='https://www.baidu.com/?tn=21002492_25_hao_pg.html'>万能助手</a>")
-        label4.setAlignment(Qt.AlignRight) ## 使文本右对齐
-        label4.setToolTip('这是一个超级链接') # 设置提示
 
-        #设置垂直布局
+        label4.setText("<a href='https://item.jd.com/12417265.html'>感谢关注《Python从菜鸟到高手》</a>")
+
+        label4.setAlignment(Qt.AlignRight)
+
+        label4.setToolTip('这是一个超级链接')
+
         vbox = QVBoxLayout()
 
-        # 将标签放入垂直布局
         vbox.addWidget(label1)
         vbox.addWidget(label2)
         vbox.addWidget(label3)
         vbox.addWidget(label4)
 
-        # 当链接悬停时连接linkHovered方法
+
         label2.linkHovered.connect(self.linkHovered)
-        # 当链接激活时连接linkClicked方法
+
         label4.linkActivated.connect(self.linkClicked)
 
         self.setLayout(vbox)
