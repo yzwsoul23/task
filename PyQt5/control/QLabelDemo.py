@@ -37,7 +37,8 @@ class QLabelDemo(QWidget) :
         label3 = QLabel(self)
         label4 = QLabel(self)
 
-        label1.setText("<font color=yellow>这是一个文本标签.</font>")
+        #
+        label1.setText("<font col8or=yellow>这是一个文本标签.</font>")
         label1.setAutoFillBackground(True) # 自动填充背景
         palette = QPalette()
         palette.setColor(QPalette.Window,Qt.blue)  # 设置背景色
@@ -49,23 +50,23 @@ class QLabelDemo(QWidget) :
         label3.setAlignment(Qt.AlignCenter)
         label3.setToolTip('这是一个图片标签')
         label3.setPixmap(QPixmap("./images/python.jpg"))
+
         # 如果设为True，用浏览器打开网页，如果设为False，调用槽函数
         label4.setOpenExternalLinks(True)
-
         label4.setText("<a href='https://item.jd.com/12417265.html'>感谢关注《Python从菜鸟到高手》</a>")
+        label4.setAlignment(Qt.AlignRight) ## 使文本右对齐
+        label4.setToolTip('这是一个超级链接') # 设置提示
 
-        label4.setAlignment(Qt.AlignRight)
-
-        label4.setToolTip('这是一个超级链接')
-
+        #设置垂直布局
         vbox = QVBoxLayout()
 
+        # 将标签放入垂直布局
         vbox.addWidget(label1)
         vbox.addWidget(label2)
         vbox.addWidget(label3)
         vbox.addWidget(label4)
 
-
+        # 绑定
         label2.linkHovered.connect(self.linkHovered)
 
         label4.linkActivated.connect(self.linkClicked)
