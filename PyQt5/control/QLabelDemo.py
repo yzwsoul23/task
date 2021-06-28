@@ -53,7 +53,7 @@ class QLabelDemo(QWidget) :
 
         # 如果设为True，用浏览器打开网页，如果设为False，调用槽函数
         label4.setOpenExternalLinks(True)
-        label4.setText("<a href='https://item.jd.com/12417265.html'>感谢关注《Python从菜鸟到高手》</a>")
+        label4.setText("<a href='https://www.baidu.com/?tn=21002492_25_hao_pg.html'>万能助手</a>")
         label4.setAlignment(Qt.AlignRight) ## 使文本右对齐
         label4.setToolTip('这是一个超级链接') # 设置提示
 
