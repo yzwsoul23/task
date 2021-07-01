@@ -26,7 +26,7 @@ class QLineEditValidator(QWidget):
         intLineEdit = QLineEdit()
         doubleLineEdit = QLineEdit()
         validatorLineEdit = QLineEdit()
-
+        # 设置表格布局的行
         formLayout.addRow('整数类型', intLineEdit)
         formLayout.addRow('浮点类型', doubleLineEdit)
         formLayout.addRow('数字和字母',validatorLineEdit)
@@ -47,12 +47,12 @@ class QLineEditValidator(QWidget):
         doubleValidator.setDecimals(2)
 
         # 字符和数字
-        reg = QRegExp('[a-zA-Z0-9]+$')
+        reg = QRegExp('[a-zA-Z0-9]+$') # 正则表达式
         validator = QRegExpValidator(self)
         validator.setRegExp(reg)
 
         # 设置校验器
-
+        # 将控件和校验器绑定
         intLineEdit.setValidator(intValidator)
         doubleLineEdit.setValidator(doubleValidator)
         validatorLineEdit.setValidator(validator)
