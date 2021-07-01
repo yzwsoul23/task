@@ -19,8 +19,9 @@ class QLineEditDemo(QWidget):
         edit1 = QLineEdit()
         # 使用int校验器
         edit1.setValidator(QIntValidator())
-        edit1.setMaxLength(4)  # 设置最大长度不超过9999
-        edit1.setAlignment(Qt.AlignRight)
+        edit1.setMaxLength(9)  # 设置最大长度不超过9999
+        # 设置输入文本位置
+        edit1.setAlignment(Qt.AlignCenter)
         edit1.setFont(QFont('Arial',20))
 
         edit2 = QLineEdit()
