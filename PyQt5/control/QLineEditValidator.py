@@ -37,7 +37,7 @@ class QLineEditValidator(QWidget):
 
         # 整数校验器 [1,99]
         intValidator = QIntValidator(self)
-        intValidator.setRange(1,99)
+        intValidator.setRange(1,90000)
 
         # 浮点校验器 [-360,360]，精度：小数点后2位
         doubleValidator = QDoubleValidator(self)
