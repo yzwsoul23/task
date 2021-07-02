@@ -18,9 +18,9 @@ class QTextEditDemo(QWidget) :
         self.resize(300,320)
 
         self.textEdit = QTextEdit()
+
         self.buttonText = QPushButton('显示文本')
         self.buttonHTML = QPushButton('显示HTML')
-
         self.buttonToText = QPushButton('获取文本')
         self.buttonToHTML = QPushButton('获取HTML')
 
@@ -34,6 +34,7 @@ class QTextEditDemo(QWidget) :
 
         self.setLayout(layout)
 
+        # 将按钮单击信号连接槽
         self.buttonText.clicked.connect(self.onClick_ButtonText)
         self.buttonHTML.clicked.connect(self.onClick_ButtonHTML)
 
@@ -41,12 +42,14 @@ class QTextEditDemo(QWidget) :
         self.buttonToHTML.clicked.connect(self.onClick_ButtonToHTML)
 
     def onClick_ButtonText(self):
+        # 设置纯文本
         self.textEdit.setPlainText('Hello World，世界你好吗？')
 
     def onClick_ButtonToText(self):
         print(self.textEdit.toPlainText())
 
     def onClick_ButtonHTML(self):
+        # 设置富文本
         self.textEdit.setHtml('<font color="blue" size="5">Hello World</font>')
     def onClick_ButtonToHTML(self):
         print(self.textEdit.toHtml())
