@@ -36,7 +36,7 @@ class QPushButtonDemo(QDialog) :
         self.button1.toggle()
         # 将按钮被单击连接按钮判断是否被选中并输出的槽函数
         self.button1.clicked.connect(self.buttonState)
-        # 将按钮被单击连接按钮判断是否被选中并输出的槽函数
+        # 将按钮被单击连接显示按钮1被点击的槽函数
         self.button1.clicked.connect(lambda :self.whichButton(self.button1))
 
         layout.addWidget(self.button1)
@@ -44,16 +44,22 @@ class QPushButtonDemo(QDialog) :
         # 在文本前面显示图像
 
         self.button2 = QPushButton('图像按钮')
+        # 设置图标
         self.button2.setIcon(QIcon(QPixmap('./images/python.png')))
+        # 将按钮被单击连接按钮判断是否被选中并输出的槽函数
         self.button2.clicked.connect(lambda:self.whichButton(self.button2))
         layout.addWidget(self.button2)
 
         self.button3 = QPushButton('不可用的按钮')
+        # 按钮设置为不可用
         self.button3.setEnabled(False)
         layout.addWidget(self.button3)
 
+        # 设置按钮热键
         self.button4 = QPushButton('&MyButton')
+        # 设置默认按钮
         self.button4.setDefault(True)
+        # 将按钮被单击连接按钮判断是否被选中并输出的槽函数
         self.button4.clicked.connect(lambda:self.whichButton(self.button4))
         layout.addWidget(self.button4)
 
@@ -61,6 +67,7 @@ class QPushButtonDemo(QDialog) :
         self.resize(400,300)
 
     def buttonState(self):
+        # 检查按钮是否被选中并分别处理
         if self.button1.isChecked():
             print('按钮1已经被选中')
         else:
