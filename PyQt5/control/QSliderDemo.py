@@ -17,6 +17,7 @@ class QSliderDemo(QWidget):
     def initUI(self):
         self.setWindowTitle('滑块控件演示')
         self.resize(300,700)
+        Family = ['SimSun','SimHei','Microsoft YaHei','Microsoft JhengHei',]
 
         layout = QVBoxLayout()
         self.label = QLabel('你好 PyQt5')
@@ -76,6 +77,10 @@ class QSliderDemo(QWidget):
         size = self.sender().value() * 4
         # 设置标签文本的字号为size
         self.label.setFont(QFont('Arial',size))
+
+    #def valueChangeFamily(self):
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     main = QSliderDemo()
