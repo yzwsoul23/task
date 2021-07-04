@@ -32,8 +32,14 @@ class QSpinBoxDemo(QWidget):
         # 设置计数器范围
         self.sb.setRange(-10,101)
         # 设置单次调整步数(步进值)
-        self.sb.setSingleStep(50)
+        self.sb.setSingleStep(5)
         layout.addWidget(self.sb)
+        # 设置计数器前缀
+        self.sb.setPrefix('数值: ')
+        # 最小值
+        self.sb.setMinimum(-2)
+        # 最大值
+        self.sb.setMaximum(80)
         # 连接值被更改信号和valueChange槽函数
         self.sb.valueChanged.connect(self.valueChange)
         self.setLayout(layout)
