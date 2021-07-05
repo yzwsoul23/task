@@ -17,8 +17,9 @@ class QSliderDemo(QWidget):
     def initUI(self):
         self.setWindowTitle('滑块控件演示')
         self.resize(300,700)
-        Family = ['SimSun','SimHei','Microsoft YaHei','Microsoft JhengHei',]
-
+        Family = ['SimSun','SimHei','Microsoft YaHei','Microsoft JhengHei','NSimSun','PMingLiU','MingLiU','DFKai-SB','FangSong','KaiTi_GB2312','FangSong_GB2312_GB2312','KaiTi_GB2312','SimSuncss']
+        fronsize = QFont()
+        fron = QFont()
         layout = QVBoxLayout()
         self.label = QLabel('你好 PyQt5')
         self.label.setAlignment(Qt.AlignCenter)
@@ -30,15 +31,15 @@ class QSliderDemo(QWidget):
 
 
         # 设置最小值
-        self.slider.setMinimum(12)
+        self.slider.setMinimum(0)
         # 设置最大值
-        self.slider.setMaximum(48)
+        self.slider.setMaximum(12)
 
         # 步长
         self.slider.setSingleStep(1)
 
         # 设置当前值
-        self.slider.setValue(18)
+        self.slider.setValue(1)
 
         # 设置刻度的位置，刻度在下方
         self.slider.setTickPosition(QSlider.TicksBothSides)
@@ -67,18 +68,25 @@ class QSliderDemo(QWidget):
         # 设置刻度的间隔
         self.slider1.setTickInterval(2)
         # 连接值被更改信号和valueChange槽函数
-        self.slider1.valueChanged.connect(self.valueChange)
+        self.slider1.valueChanged.connect(self.valueChangeFamily)
         self.setLayout(layout)
 
     def valueChange(self):
+        global fronsize
         # 输出信号的值
         print('当前值：%s' % self.sender().value())
         # 将size设为信号的值
-        size = self.sender().value() * 4
+        size = self.sender().value()
+        fronsize.setPointSize(size)
         # 设置标签文本的字号为size
-        self.label.setFont(QFont('Arial',size))
+        self.label.setFont(fronsize)
 
-    #def valueChangeFamily(self):
+    def valueChangeFamily(self):
+        global Family,fron
+        print('当前值：%s' % self.sender().value())
+        ind = self.sender().value()
+        fron.setFamily(Family[ind])
+        self.label.setFont(fron)
 
 
 if __name__ == '__main__':
