@@ -22,10 +22,9 @@ class PassWord(QWidget):
         self.edit.setClearButtonEnabled(True)
 
         self.button = QPushButton('显示')
-        self.button.setCheckable(True)
         self.button.setMaximumSize(40,25)
-        self.button.toggle()
-        self.button.clicked.connect(self.buttonState)
+        self.button.pressed.connect(self.buttonState)
+        self.button.released.connect(self.buttonrelease)
 
         hboxlayou = QHBoxLayout()
         hboxlayou.addWidget(self.edit)
@@ -34,10 +33,10 @@ class PassWord(QWidget):
         self.setWindowTitle('输入密码')
 
     def buttonState(self):
-        if self.button.isChecked():
-            self.edit.setEchoMode(QLineEdit.Normal)
-        else:
-            self.edit.setEchoMode(QLineEdit.Password)
+        self.edit.setEchoMode(QLineEdit.Normal)
+
+    def buttonrelease(self):
+        self.edit.setEchoMode(QLineEdit.Password)
 
     def txt(self, text):
         if text == '2019520474':
