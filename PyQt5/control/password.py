@@ -12,6 +12,7 @@ class PassWord(QWidget):
         self.edit = QLineEdit()
         self.edit.setPlaceholderText('请输入密码')
         self.edit.setEchoMode(QLineEdit.Password)
+        self.edit.setMinimumSize(200,20)
         self.edit.textEdited.connect(self.txt)
         # 字符和数字
         reg = QRegExp('[a-zA-Z0-9]+$')  # 正则表达式
