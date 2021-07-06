@@ -13,9 +13,16 @@ class PassWord(QWidget):
         self.edit.setPlaceholderText('请输入密码')
         self.edit.setEchoMode(QLineEdit.Password)
         self.edit.textEdited.connect(self.txt)
+        # 字符和数字
+        reg = QRegExp('[a-zA-Z0-9]+$')  # 正则表达式
+        validator = QRegExpValidator(self)
+        validator.setRegExp(reg)
+        self.edit.setValidator(validator)
+        self.edit.setClearButtonEnabled(True)
 
         self.button = QPushButton('显示')
         self.button.setCheckable(True)
+        self.button.setMaximumSize(40,25)
         self.button.toggle()
         self.button.clicked.connect(self.buttonState)
 
