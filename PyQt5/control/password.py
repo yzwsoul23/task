@@ -21,8 +21,9 @@ class PassWord(QWidget):
         self.edit.setValidator(validator)
         self.edit.setClearButtonEnabled(True)
 
-        self.button = QPushButton('显示')
-        self.button.setMaximumSize(40,25)
+        self.button = QPushButton('θ')
+        self.button.setToolTip('显示密码')
+        self.button.setMaximumSize(25,25)
         self.button.pressed.connect(self.buttonState)
         self.button.released.connect(self.buttonrelease)
 
