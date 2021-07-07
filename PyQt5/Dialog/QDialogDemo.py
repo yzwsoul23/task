@@ -41,7 +41,7 @@ class QDialogDemo(QMainWindow):
         button = QPushButton('确定',dialog)
         # 连接按钮点击信号和关闭对话框槽函数
         button.clicked.connect(dialog.close)
-        button.move(50,50)
+        button.move(20,20)
         dialog.setWindowTitle('对话框')
         # 设置窗口显示模式不关掉对话框主窗口就无法操作
         dialog.setWindowModality(Qt.ApplicationModal)
