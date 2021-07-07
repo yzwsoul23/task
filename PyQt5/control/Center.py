@@ -8,7 +8,7 @@ from PyQt5.QtGui import QFont
 
 class MessageBox(QtWidgets.QWidget):
 #继承自父类QtWidgets.QWidget
-    def __init__(self,parent = None):
+    def __init__(self):
         #parent = None代表此QWidget属于最上层的窗口,也就是MainWindows.
         QtWidgets.QWidget.__init__(self)
         #因为继承关系，要对父类初始化
